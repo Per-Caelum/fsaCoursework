@@ -1,0 +1,45 @@
+body {
+  background-color: black;
+}
+
+header {
+  color: rgba(250, 50, 25, 2);
+}
+section {
+  margin-left: 5%;
+}
+
+section h1 {
+  background-color: rgb(255, 0, 76);
+  color: white;
+  width: 45%;
+}
+
+.wrapperContainerForTheArticles {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+article {
+  background-color: rgb(150, 150, 150);
+  border: solid 1px rgb(57, 131, 145);
+  margin-right: 2.5%;
+  width: 21%;
+  height: 150px;
+}
+article h2 {
+  background-color: rgb(85, 5, 61);
+  margin-top: 0px;
+}
+
+article img {
+  max-width: 100%;
+  padding-top: 5%;
+}
+
+h2 {
+  color: white;
+}
+li {
+  color: black;
+}
