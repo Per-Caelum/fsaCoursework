@@ -4,15 +4,11 @@ body {
 
 header {
   color: rgba(250, 50, 25, 2);
-}
-section {
   margin-left: 5%;
 }
 
-section h1 {
-  background-color: rgb(255, 0, 76);
-  color: white;
-  width: 45%;
+section {
+  margin-left: 5%;
 }
 
 .wrapperContainerForTheArticles {
