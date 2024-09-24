@@ -1,0 +1,58 @@
+html {
+  display: flex;
+}
+
+@media (max-width: 900px) {
+  div {
+    padding: 0px;
+  }
+}
+footer {
+  position: fixed;
+  bottom: 10px;
+}
+
+.shapeContainer {
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+}
+.shape {
+  position: absolute;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 50vh solid transparent;
+  border-right: 50vh solid transparent;
+  border-bottom: 100vh solid cyan;
+
+  rotate: 130deg;
+
+  z-index: -1;
+}
+
+.square {
+  background-color: magenta;
+  width: 10em;
+  height: 10em;
+  rotate: 25deg;
+  margin-left: 10em;
+  margin-top: 5em;
+}
+
+.circle {
+  background-color: yellow;
+  width: 40px;
+  height: 40px;
+  margin-left: 20vh;
+  margin-top: 5px;
+
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  z-index: 1;
+}
