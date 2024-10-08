@@ -46,7 +46,7 @@ class Numbers {
   }
   product() {
     //return the product of the numbers
-    return this.data.reduce((acc, num) => (acc *= num), 0);
+    return this.data.reduce((acc, num) => (acc *= num), 1);
   }
   greaterThan(target) {
     //return the numbers greater than the target
