@@ -4,7 +4,7 @@ Accepted numbers would be two numbers and expected output would the multiplicati
 Given two numbers, 5 and 10, expected to be single number 50 result.
 Given two numbers, 2 and 4, expected to be single number 8 result.
 Given one number, 20, expected to return error.
-Given two strings, "foo" and "bar", expected to return error.
+Given two strings, "foo" anI wd "bar", expected to return error.
 
 concatOdds
 The function will take two arrays of integers and return a single
