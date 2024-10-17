@@ -9,86 +9,103 @@ const freelancers = [
   { name: "Prof. Goose", price: 72, occupation: "driver" },
 ];
 
-const display = (arr) => {
-  const body = document.querySelector("body");
+class Roster {
+  constructor() {
+    this.pullFromFreelancerRoster = freelancers;
+    this.pushToFreelancerRoster = [];
 
-  const heading = document.createElement("div");
+    //Display declarations
+    this.body = document.querySelector("body");
 
-  const title = document.createElement("h1");
-  title.innerHTML = "Freelancer Forum";
+    this.heading = document.createElement("div");
 
-  const averageStartingPrice = document.createElement("h2");
+    this.title = document.createElement("h1");
+    this.title.innerHTML = "Freelancer Forum";
 
-  const chartTitle = document.createElement("h1");
-  chartTitle.innerText = "Available Freelancers";
+    this.averageStartingPrice = document.createElement("h2");
 
-  /*Break for my own eyes categorizing */
-  const article = document.createElement("article");
-  article.style.display = "flex";
-  article.style.flexWrap = "wrap";
+    this.chartTitle = document.createElement("h1");
+    this.chartTitle.innerText = "Available Freelancers";
 
-  const nameSection = document.createElement("section");
-  nameSection.append(document.createElement("h3"));
-  nameSection.innerText = "Name";
-  nameSection.style.paddingRight = "15px";
+    //Chart Display declarations
+    this.article = document.createElement("article");
+    this.article.style.display = "flex";
+    this.article.style.flexWrap = "wrap";
 
-  const priceSection = document.createElement("section");
-  priceSection.append(document.createElement("h3"));
-  priceSection.innerText = "Starting Price";
-  priceSection.style.paddingRight = "15px";
+    this.nameSection = document.createElement("section");
+    this.nameSection.append(document.createElement("h3"));
+    this.nameSection.innerText = "Name";
+    this.nameSection.style.paddingRight = "15px";
+    this.priceSection = document.createElement("section");
+    this.priceSection.append(document.createElement("h3"));
+    this.priceSection.innerText = "Starting Price";
+    this.priceSection.style.paddingRight = "15px";
+    this.occupationSection = document.createElement("section");
+    this.occupationSection.append(document.createElement("h3"));
+    this.occupationSection.innerText = "Occupation";
+  }
 
-  const occupationSection = document.createElement("section");
-  occupationSection.append(document.createElement("h3"));
-  occupationSection.innerText = "Occupation";
+  initialAppend = () => {
+    //Make Appends Section
+    this.update();
+    this.update();
+    this.article.append(this.nameSection);
+    this.article.append(this.priceSection);
+    this.article.append(this.occupationSection);
+    this.body.append(this.averageStartingPrice);
+    this.heading.append(this.title);
+    this.heading.append(this.averageStartingPrice);
+    this.heading.append(this.chartTitle);
+    this.body.append(this.heading);
+    this.body.append(this.article);
+  };
 
-  arr.forEach((element) => {
-    const nameDiv = document.createElement("div");
-    const occupationDiv = document.createElement("div");
-    const priceDiv = document.createElement("div");
-    nameDiv.innerText = element.name;
-    occupationDiv.innerText = element.occupation;
-    priceDiv.innerText = element.price;
-    nameSection.append(nameDiv);
-    occupationSection.append(occupationDiv);
-    priceSection.append(priceDiv);
-  });
+  chartAppend = () => {
+    const element = this.pushToFreelancerRoster.at(
+      this.pushToFreelancerRoster.length - 1
+    );
+    this.nameDiv = document.createElement("div");
+    this.occupationDiv = document.createElement("div");
+    this.priceDiv = document.createElement("div");
+    this.nameDiv.innerText = element.name;
+    this.occupationDiv.innerText = element.occupation;
+    this.priceDiv.innerText = element.price;
+    this.nameSection.append(this.nameDiv);
+    this.occupationSection.append(this.occupationDiv);
+    this.priceSection.append(this.priceDiv);
 
-  averageStartingPrice.innerText = `The average starting price is  ${averagePrices(
-    arr
-  )} `;
-  //Make Appends Section
-  article.append(nameSection);
-  article.append(priceSection);
-  article.append(occupationSection);
+    this.averageStartingPrice.innerText = `The average starting price is  ${this.averagePrices()} `;
+  };
 
-  body.append(averageStartingPrice);
-  heading.append(title);
-  heading.append(averageStartingPrice);
-  heading.append(chartTitle);
+  addToRoster = () => {
+    let index = Math.floor(
+      Math.random() * (this.pullFromFreelancerRoster.length - 1)
+    );
+    const [freelancer] = this.pullFromFreelancerRoster.splice(index, 1);
+    this.pushToFreelancerRoster.push(freelancer);
+  };
 
-  body.append(heading);
-  body.append(article);
-};
+  averagePrices = () => {
+    return Math.round(
+      this.pushToFreelancerRoster
+        .map((element) => element.price)
+        .reduce((acc, price) => acc + price, 0) /
+        this.pushToFreelancerRoster.length
+    );
+  };
 
-let averagePrices = (arr) => {
-  return Math.round(
-    arr.map((element) => element.price).reduce((acc, price) => acc + price, 0) /
-      arr.length
-  );
-};
-
-// let randomizeFreelancers = () => {
-//   return freelancers.filter(() => Math.round(Math.random()) === 1);
-// };
-
-let addRandomFreelancer = (arr) => {
-  freelancers.forEach((element, index) => !arr[index]);
-};
+  update = () => {
+    if (this.pullFromFreelancerRoster.length > 1) {
+      this.addToRoster();
+      this.chartAppend();
+    }
+  };
+}
 
 const init = () => {
-  let randFreelancer = randomizeFreelancers();
-  display(randFreelancer);
+  const roster = new Roster();
+  roster.initialAppend();
+  setInterval(roster.update, 3000);
 };
 
 init();
-setInterval(addRandomFreelancer(), 3000);
