@@ -33,9 +33,9 @@ const lockCombinationRight = 13 * 3;
 
 //5
 //Generate a concatenated output so that the users can see the code's results
-//alert(
-// `${userPrompt} ${lockCombinationLeft} - ${lockCombinationMiddle} - ${lockCombinationRight}`
-//);
+alert(
+  `${userPrompt} ${lockCombinationLeft} - ${lockCombinationMiddle} - ${lockCombinationRight}`
+);
 
 const outputMessage = `${userPrompt} ${lockCombinationLeft} - ${lockCombinationMiddle} - ${lockCombinationRight}`;
 
