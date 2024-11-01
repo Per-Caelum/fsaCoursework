@@ -1,6 +1,8 @@
 //import React from "react";
 import { useState, useEffect } from "react";
 import ContactRow from "./ContactRow";
+//import SelectedContact from "./SelectedContact";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 
@@ -10,9 +12,9 @@ const dummyContacts = [
   { id: 3, name: "BB-8", phone: "888-888-8888", email: "bb8@droids.com" },
 ];
 
-const ContactList = /* async ?**/ () => {
+const ContactList = /* async ?**/ ({ setSelectedContactId }) => {
   const [contacts, setContacts] = useState(dummyContacts);
-  console.log("Contacts: ", contacts);
+ // console.log("Contacts: ", contacts);
 
   useEffect(() => {
     const fetchContacts = async () => {
@@ -47,7 +49,13 @@ const ContactList = /* async ?**/ () => {
           // Map over data here
 
           contacts.map((contact) => {
-            return <ContactRow key={contact.id} contact={contact} />;
+            return (
+              <ContactRow
+                key={contact.id}
+                contact={contact}
+                setSelectedContactId={setSelectedContactId} /*🐝**/
+              />
+            );
           })
         }
       </tbody>
