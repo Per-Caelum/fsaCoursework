@@ -24,6 +24,10 @@ body > div {
   padding: 2em;
   justify-content: space-evenly;
 }
+#footer {
+  padding: 2em;
+  justify-content: space-evenly;
+}
 #main-section {
   flex-grow: 1;
 }
@@ -39,5 +43,14 @@ body > div {
 }
 .blue {
   background-color: #275db3;
+  color: white;
+}
+.green {
+  background-color: green;
+  color: white;
+}
+.purple {
+  background-color: purple;
+
   color: white;
 }
