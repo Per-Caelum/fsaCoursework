@@ -11,6 +11,8 @@ const api = createApi({
     baseUrl: API_URL,
   }),
   tagTypes: ["Puppy"], //🐝
+  
+
 });
 
 export default api;

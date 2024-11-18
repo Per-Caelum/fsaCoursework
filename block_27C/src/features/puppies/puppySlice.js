@@ -20,18 +20,31 @@ const puppyApi = api.injectEndpoints({
       query: () => ({
         url: "/puppy",
         method: "GET",
-        providedTags: ["Puppy"],
       }),
+      providedTags: ["Puppy"],
     }),
     getPuppy: build.query({
       query: () => ({
         url: "/puppy",
         method: "GET",
-        providedTags: ["Puppy"],
       }),
+      providedTags: ["Puppy"],
     }),
-    addPuppy: build.mutation({ invalidatesTags: ["Puppy"] }),
-    deletePuppy: build.mutation({ invalidatesTags: ["Puppy"] }),
+    addPuppy: build.mutation({
+      query: (newPuppy) => ({
+        url: "/puppy",
+        method: "POST",
+        body: newPuppy,
+      }),
+      invalidatesTags: ["Puppy"],
+    }),
+    deletePuppy: build.mutation({
+      query: (id) => ({
+        url: `/puppy/${id}}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Puppy"],
+    }),
   }),
 });
 
@@ -41,3 +54,5 @@ export const {
   useAddPuppyMutation,
   useDeletePuppyMutation,
 } = puppyApi;
+
+export default puppyApi;
