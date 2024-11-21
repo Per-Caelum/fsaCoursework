@@ -18,14 +18,14 @@ const puppyApi = api.injectEndpoints({
   endpoints: (build) => ({
     getPuppies: build.query({
       query: () => ({
-        url: "/puppy",
+        url: "/players",
         method: "GET",
       }),
       providedTags: ["Puppy"],
     }),
     getPuppy: build.query({
       query: () => ({
-        url: "/puppy",
+        url: "/players",
         method: "GET",
       }),
       providedTags: ["Puppy"],

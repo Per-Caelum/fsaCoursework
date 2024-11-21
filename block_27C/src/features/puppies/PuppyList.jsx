@@ -1,4 +1,10 @@
-import puppyApi from "./puppySlice.js";
+import { useEffect, useState } from "react";
+import {
+  useGetPuppiesQuery,
+  // useGetPuppyQuery,
+  // useAddPuppyMutation,
+  // useDeletePuppyMutation,
+} from "./puppySlice.js";
 
 /**
  * @component
@@ -7,14 +13,23 @@ import puppyApi from "./puppySlice.js";
  */
 export default function PuppyList({ setSelectedPuppyId }) {
   // TODO: Get data from getPuppies query
-  const { puppies, isLoading } = puppyApi.useGetPuppiesQuery(); //🐝
-  console.log(`🐝 ${puppies} puppyApi`);
+  const { data, status, isLoading } = useGetPuppiesQuery(); //🐝
+  console.log(`🐝 ${status} puppyApieee`);
+  console.log(`🐝 ${data} data`);
+  const [puppies, setPuppies] = useState([]);
+  useEffect(() => {
+    if (data?.data) {
+      console.log(data.data.players);
+      setPuppies(data.data.players);
+    }
+  }, [status]);
+
   return (
     <article>
       <h2>Roster</h2>
       <ul className="puppies">
         {isLoading && <li>Loading puppies...</li>}
-        {puppies.map((p) => (
+        {/* puppies.map((p) => (
           <li key={p.id}>
             <h3>
               {p.name} #{p.id}
@@ -26,7 +41,7 @@ export default function PuppyList({ setSelectedPuppyId }) {
               See details
             </button>
           </li>
-        ))}
+        ))} */}
       </ul>
     </article>
   );
