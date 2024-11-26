@@ -15,15 +15,14 @@ export default function PuppyForm() {
   const [breed, setBreed] = useState("");
 
   // TODO: Use the `addPuppy` mutation to add a puppy when the form is submitted
-  const [addPuppy, { error, isLoading }] = useAddPuppyMutation();
+  const [{ addPuppy, error, isLoading }] = useAddPuppyMutation();
 
   function postPuppy(event) {
     event.preventDefault();
 
-    addPuppy(name, breed);
-
     // Placeholder image w/ random photos of dogs
     const imageUrl = "https://loremflickr.com/200/300/dog";
+    addPuppy(name, breed, imageUrl);
   }
 
   return (

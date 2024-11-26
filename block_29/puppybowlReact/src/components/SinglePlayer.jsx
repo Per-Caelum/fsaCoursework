@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import api from "../API";
 
-const SinglePlayer = () => {
-  useEffect(() => {
-    const [puppies, setPuppies] = useState();
+const SinglePlayer = (e) => {
+  e.preventDefault();
+  const [puppies, setPuppies] = useState();
 
+  useEffect(() => {
     const fetchPuppies = async () => {
       try {
         const { data } = await axios.get(api);

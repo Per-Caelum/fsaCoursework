@@ -8,8 +8,9 @@ const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
+    endpoints: () => ({}),
   }),
- // tagTypes: ["Puppy"], //🐝
+  // tagTypes: ["Puppy"], //🐝
 });
 
 export default api;

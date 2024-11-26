@@ -1,7 +1,4 @@
-import puppyApi, {
-  useDeletePuppyMutation,
-  useGetPuppyQuery,
-} from "./puppySlice.js";
+import { useDeletePuppyMutation, useGetPuppyQuery } from "./puppySlice.js";
 
 /**
  * @component
@@ -10,15 +7,20 @@ import puppyApi, {
  */
 export default function PuppyDetails({ selectedPuppyId, setSelectedPuppyId }) {
   // TODO: Grab data from the `getPuppy` query
-  const { puppy, errorGet, isLoading } = useGetPuppyQuery();
+  const { data, status, isLoading } = useGetPuppyQuery();
 
   // TODO: Use the `deletePuppy` mutation to remove a puppy when the button is clicked
-  const [delPuppy, { errorDel, isLoadingDel }] = useDeletePuppyMutation();
+  const [deletePuppy] = useDeletePuppyMutation();
+  console.log(`🐝🐝🐝. 🐝🐝🐝 ${data?.data?.json().unwrap()}`);
 
-  function removePuppy(id) {
-    delPuppy(id);
-    setSelectedPuppyId();
-  }
+  const removePuppy = async (id) => {
+    try {
+      const response = await deletePuppy(id).unwrap();
+      setSelectedPuppyId(id);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   // There are 3 possibilities:
   let $details;
@@ -35,15 +37,15 @@ export default function PuppyDetails({ selectedPuppyId, setSelectedPuppyId }) {
     $details = (
       <>
         <h3>
-          {puppy.name} #{puppy.id}
+          {data?.data?.name} #{data?.data?.id}
         </h3>
-        <p>{puppy.breed}</p>
-        <p>Team {puppy.team?.name ?? "Unassigned"}</p>
-        <button onClick={() => removePuppy(puppy.id)}>
+        <p>{data?.data?.breed}</p>
+        <p>Team {data?.data?.team?.name ?? "Unassigned"}</p>
+        <button onClick={() => removePuppy(data?.data?.id)}>
           Remove from roster
         </button>
         <figure>
-          <img src={puppy.imageUrl} alt={puppy.name} />
+          <img src={data?.data?.imageUrl} alt={data?.data?.name} />
         </figure>
       </>
     );
