@@ -13,7 +13,11 @@ import {
 export default function PuppyList({ setSelectedPuppyId }) {
   // TODO: Get data from getPuppies query
   const { data, status, isLoading } = useGetPuppiesQuery(); //🐝
-  console.log(`beeeee getpuppies ${data?.unwrap()}`);
+  console.log(
+    `🐝><🐝><🐝 PupList useGetPuppies ${JSON.stringify(
+      useGetPuppiesQuery().data?.data?.players
+    )}`
+  );
   /*
   If get funky data: print method with ()
   console.log(useGetPuppiesQuery())
