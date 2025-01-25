@@ -5,7 +5,6 @@ const prisma = require("../prisma");
 const { authenticate } = require("./auth");
 router.use(authenticate);
 
-
 router.get("/", authenticate, async (req, res) => {
   try {
     const orders = await prisma.order.findMany({

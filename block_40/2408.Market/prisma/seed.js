@@ -1,6 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
-// const express = require("express");
 const prisma = new PrismaClient();
+// const express = require("express");
 
 const { faker } = require("@faker-js/faker");
 const seed = async () => {

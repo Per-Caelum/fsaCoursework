@@ -6,7 +6,7 @@ module.exports = app;
 // const prisma = require("./prisma");
 
 // TODO: routes!
-app.use("/products", require("../api/products.js"));
+app.use("/products", require("../api/products"));
 app.use("/orders", require("../api/orders"));
 app.use(require("../api/auth").router);
 
@@ -17,3 +17,13 @@ app.listen(PORT, () => {
 });
 
 //amends at 4pm
+// 404
+app.use((req, res, next) => {
+  next({ status: 404, message: "Endpoint not found." });
+});
+// Error-handling
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(err.status ?? 500);
+  res.json(err.message ?? "Sorry, something went wrong :(");
+});
