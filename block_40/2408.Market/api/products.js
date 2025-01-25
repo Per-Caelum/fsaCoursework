@@ -9,7 +9,12 @@ const prisma = require("../prisma");
 // TODO: routes!
 router.get("/", async (req, res, next) => {
   try {
-    const product = await prisma.product.findMany();
+    console.log("console");
+
+    const product = await prisma.products.findMany();
+    console.log("Products fetched:", products);
+    console.log("Products jsonfetched:", JSON.stringify(products, null, 2));
+
     res.json(product);
   } catch (e) {
     next(e);

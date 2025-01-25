@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const JWT_SECRET = process.env.JWT_SECRET;
 const prisma = require("../prisma");
+
 function createToken(id) {
   return jwt.sign({ id }, JWT_SECRET, { expiresIn: "2h" });
 }
@@ -22,7 +23,7 @@ router.use(async (req, res, next) => {
     next(e);
   }
 });
-router.post("register", async (req, res, next) => {
+router.post("/register", async (req, res, next) => {
   const { username, password } = req.body;
   try {
     const user = await prisma.user.create({
