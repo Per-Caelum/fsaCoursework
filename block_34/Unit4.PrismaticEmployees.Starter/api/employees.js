@@ -53,49 +53,49 @@ router.get("/employees/:id", async (req, res, next) => {
   }
 });
 
-router.put("/employees/:id", async (req, res, next) =>{
-
+router.put("/employees/:id", async (req, res, next) => {
   const { id } = req.params;
-  const {name} = req.body;
+  const { name } = req.body;
 
-  if(!name || typeof name !== "string" || name.trim() === "") {
-    return res.status(400).json({message: "Need a valid name"})
+  if (!name || typeof name !== "string" || name.trim() === "") {
+    return res.status(400).json({ message: "Need a valid name" });
   }
-  if(!employee){
-    return res.status(404).json({message:"Could not find Employee"})
+  if (!employee) {
+    return res.status(404).json({ message: "Could not find Employee" });
   }
-  try{
-  const employeeUpdate = await prisma.employees.update({
-    where: { id: Number(id)},
-    data: {name},
+  try {
+    const employeeUpdate = await prisma.employees.update({
+      where: { id: Number(id) },
+      data: { name },
+    });
 
-  });
-
-  res.status(200).json({employeeUpdate});
-}
-catch(e)
-{ next(e)}
-
+    res.status(200).json({ employeeUpdate });
+  } catch (e) {
+    next(e);
+  }
 });
 
+router.delete("employees/:id"),
+  async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      const employeeToDelete = await prisma.employees.findUnique({
+        where: { id: Number(id) },
+      });
+      if (!employeeToDelete) {
+        return res
+          .status(404)
+          .json({
+            message: "Could not find Employee. Did you already delete?",
+          });
+      }
 
-router.delete("employees/:id"), async(req, res, next) => {
-  const{id} = req.params;
-  try{
-const employeeToDelete = await prisma.employees.findUnique({
-  where: { id: Number(id)}
-});
-if(!employeeToDelete){
-  return res.status(404).json({message:"Could not find Employee. Did you already delete?"})
-}
+      await prisma.employees.delete({
+        where: { id: Number(id) },
+      });
 
-await prisma.employees.delete({
-  where: {id:Number(id)},
-});
-
-res.status(204).send();
-  } catch(e) {
-    res.status(500).json({ message: "Unexpected Error" });   }
-
-  }
-}
+      res.status(204).send();
+    } catch (e) {
+      res.status(500).json({ message: "Unexpected Error" });
+    }
+  };
