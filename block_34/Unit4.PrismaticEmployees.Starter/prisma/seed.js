@@ -1,18 +1,26 @@
 const prisma = require("../prisma");
 
+// const seed = async () => {
+//   const employees = [];
+//   for (let i = 0; i < 10; i++) {
+//     employees.push({ name: `Employee ${i}` });
+//   }
+
+//   try {
+//     //const result =
+//     await prisma.employees.createMany({ data: employees });
+//     console.log(`${result.count} employees created`);
+//   } catch (error) {
+//     console.error("Error seeding employees:", error);
+//   }
+// };
+
 const seed = async () => {
   const employees = [];
   for (let i = 0; i < 10; i++) {
-    employees.push({ name: `Employee ${i}` });
+    employees.push({ name: `employee ${i}` });
   }
-
-  try {
-    //const result =
-    await prisma.employees.createMany({ data: employees });
-    // console.log(`${result.count} employees created`);
-  } catch (error) {
-    console.error("Error seeding employees:", error);
-  }
+  await prisma.employees.createMany({ data: employees });
 };
 
 seed()
