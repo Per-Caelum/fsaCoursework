@@ -2,6 +2,21 @@ const express = require("express");
 const app = express();
 const PORT = 3000;
 
+// Custom middleware to force JSON parsing
+const forceJsonParsing = (req, res, next) => {
+  if (req.method === "POST" || req.method === "PUT") {
+    if (
+      !req.headers["content-type"] ||
+      req.headers["content-type"] !== "application/json"
+    ) {
+      req.headers["content-type"] = "application/json"; // Force JSON content type
+    }
+  }
+  next();
+};
+
+app.use(forceJsonParsing);
+
 // morgan is logging middleware maintained by the Expressjs team
 // see: https://expressjs.com/en/resources/middleware/morgan.html
 app.use(require("morgan")("dev"));

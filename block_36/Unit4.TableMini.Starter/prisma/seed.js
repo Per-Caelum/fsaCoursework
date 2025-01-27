@@ -1,5 +1,6 @@
 const { faker } = require("@faker-js/faker");
 const { PrismaClient } = require("@prisma/client"); // Import PrismaClient
+const prisma = new PrismaClient(); // Initialize PrismaClient
 
 const seed = async (numRestaurants = 3, numReservations = 5) => {
   // A loop must be used because `prisma.restaurant.createMany` fails here
@@ -32,3 +33,28 @@ seed()
     await prisma.$disconnect();
     process.exit(1);
   });
+
+// const seed = async () => {
+//   // A loop must be used because `prisma.restaurant.createMany` fails here
+//   for (let i = 0; i < 3; i++) {
+//     // For each restaurant, create an array of 5 reservations
+//     const reservations = [];
+//     for (let j = 0; j < 5; j++) {
+//       reservations.push({
+//         name: `Person ${i}${j}`,
+//         email: `${i}${j}@foo.bar`,
+//         partySize: Math.floor(Math.random() * 10) + 1,
+//       });
+//     }
+
+//     // Create a single restaurant with nested reservations
+//     await prisma.restaurant.create({
+//       data: {
+//         name: `Restaurant ${i + 1}`,
+//         reservations: {
+//           create: reservations,
+//         },
+//       },
+//     });
+//   }
+// };
