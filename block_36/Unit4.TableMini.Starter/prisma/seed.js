@@ -1,6 +1,5 @@
 const { faker } = require("@faker-js/faker");
 const { PrismaClient } = require("@prisma/client"); // Import PrismaClient
-const prisma = new PrismaClient(); // Initialize PrismaClient
 
 const seed = async (numRestaurants = 3, numReservations = 5) => {
   // A loop must be used because `prisma.restaurant.createMany` fails here
