@@ -5,7 +5,7 @@ const seed = async () => {
   for (let i = 0; i < 10; i++) {
     employees.push({ name: `employee ${i}` });
   }
-  await prisma.employees.createMany({ data: employees });
+  await prisma.employee.createMany({ data: employees });
 };
 
 seed()
